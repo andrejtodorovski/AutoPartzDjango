@@ -18,6 +18,7 @@
             <div class="col-md-7">
                 <h4 class="mb-3">Part description: </h4>
                 <p class="mb-3">{{ part.description }}</p>
+                <p class="mb-3">Compatible car: {{ part.compatible_car }}</p>
                 <p class="mb-3 fw-bold">{{ part.price }} ден.</p>
                 <p class="mb-3">Available: {{ part.available }}</p>
                 {% if user.is_authenticated and not user.is_superuser %}

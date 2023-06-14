@@ -14,6 +14,7 @@
                 </div>
                 <div class="text-center mt-3">
                 <h5>{{ part.name }}</h5>
+                <p class="mb-3">Compatible car: {{ part.compatible_car }}</p>
                 <p>{{ part.price }} ден.</p>
                 <h5>Manufacturer: </h5>
                 <img src="{{ MEDIA_URL }}{{ part.manufacturer.image.url }}" alt="{{ part.manufacturer.name }}" class="img-fluid mb-3" style="width: 15rem;height: 5rem">

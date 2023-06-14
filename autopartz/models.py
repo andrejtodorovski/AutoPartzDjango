@@ -20,6 +20,27 @@ class Manufacturer(models.Model):
         return self.name
 
 
+class Car(models.Model):
+    brand = models.CharField(max_length=100)
+    car_model = models.CharField(max_length=100)
+    year = models.IntegerField()
+    fuel_type = models.CharField(max_length=100,
+                                 choices=[('petrol', 'Petrol'), ('diesel', 'Diesel'), ('electric', 'Electric'),
+                                          ('hybrid', 'Hybrid'), ('gas', 'Gas')])
+    engine_displacement = models.IntegerField()
+    horse_power = models.IntegerField()
+    seats = models.IntegerField()
+    doors = models.IntegerField()
+    body_type = models.CharField(max_length=100,
+                                 choices=[('sedan', 'Sedan'), ('hatchback', 'Hatchback'), ('coupe', 'Coupe'),
+                                          ('convertible', 'Convertible'), ('suv', 'SUV'), ('minivan', 'Minivan'),
+                                          ('pickup', 'Pickup')])
+
+    def __str__(self):
+        return self.brand + ' ' + self.car_model + ' ' + str(self.year) + ' ' + self.fuel_type + ' ' + str(
+            self.engine_displacement) + 'cc ' + str(self.horse_power) + 'hp ' + self.body_type
+
+
 class Part(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -28,6 +49,7 @@ class Part(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     available = models.IntegerField()
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
+    compatible_car = models.ForeignKey(Car, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -58,7 +80,8 @@ class Order(models.Model):
     cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
     total_amount = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-    order_status = models.CharField(max_length=100, choices=([('In progress', 'In progress'), ('Delivered', 'Delivered')]))
+    order_status = models.CharField(max_length=100,
+                                    choices=([('In progress', 'In progress'), ('Delivered', 'Delivered')]))
 
     def __str__(self):
         return str(self.id)

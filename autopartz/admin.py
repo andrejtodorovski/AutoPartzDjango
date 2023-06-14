@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import CustomUser, Manufacturer, Part, ShoppingCart, CartItem, Order, Delivery
+from .models import CustomUser, Manufacturer, Part, ShoppingCart, CartItem, Order, Delivery, Car
 
 admin.site.register(CustomUser)
 admin.site.register(Manufacturer)
@@ -11,3 +11,4 @@ admin.site.register(ShoppingCart)
 admin.site.register(CartItem)
 admin.site.register(Order)
 admin.site.register(Delivery)
+admin.site.register(Car)
