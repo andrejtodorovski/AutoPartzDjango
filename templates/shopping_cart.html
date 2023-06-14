@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Shopping Cart
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-between mt-3">
+        {% for cartItem in cart_items %}
+            <div class="col-md-3">
+                <div style="height: 20rem; width: 100%">
+                    <img src="{{ MEDIA_URL }}{{ cartItem.part.image.url }}" alt="{{ cartItem.part.name }}" class="img-fluid">
+                </div>
+                <div class="text-center mt-3">
+                <h5>{{ cartItem.part.name }}</h5>
+                <p>One piece : {{ cartItem.part.price }} ден.</p>
+                <p>Quantity {{ cartItem.quantity }}</p>
+                <h5>Manufacturer: </h5>
+                <img src="{{ MEDIA_URL }}{{ cartItem.part.manufacturer.image.url }}" alt="{{ cartItem.part.manufacturer.name }}" class="img-fluid mb-3" style="width: 15rem;height: 5rem">
+                <p>Total price for this part: {{ cartItem.subtotal }}</p>
+                <form action="{% url 'remove_from_cart' cartItem.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-danger" type="submit">Remove item from cart</button>
+                </form>
+                </div>
+            </div>
+        {% endfor %}
+            <h3>Total price for order: {{ total_price }}</h3>
+    {% if total_price != 0 %}
+    <a class="btn btn-primary" href="{% url 'delivery_info' %}">Checkout</a>
+    {% else %}
+    <a class="btn btn-warning" href="{% url 'parts' %}">Add parts to card</a>
+    {% endif %}
+    </div>
+
+{% endblock %}

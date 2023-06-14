@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    My orders
+{% endblock %}
+
+{% block content %}
+<h1 class="display-6">My orders</h1>
+<table class="table pt-3">
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Order Total Amount</th>
+        <th>Order Date</th>
+        <th>Order Status</th>
+        <th>Order Details</th>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+        <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.total_amount }}</td>
+        <td>{{ order.created_at }}</td>
+        <td>{{ order.order_status }}</td>
+        <td><a href="{% url 'order_details' order.id %}" class="btn btn-primary">Details</a></td>
+    {% endfor %}
+</table>
+{% endblock %}

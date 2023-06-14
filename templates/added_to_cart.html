@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Added to Cart
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-between pt-2">
+            <div class="col-md-5">
+                <div style="height: 25rem; width: auto" class="text-center">
+                    <img src="{{ MEDIA_URL }}{{ part.image.url }}" alt="{{ part.name }}" class="img-fluid" style="height:25rem">
+                </div>
+                <div class="text-center mt-3">
+                <h5>{{ part.name }}</h5>
+                <img src="{{ MEDIA_URL }}{{ part.manufacturer.image.url }}" alt="{{ part.manufacturer.name }}" class="img-fluid mb-3" style="width: 15rem;height: 5rem">
+                </div>
+            </div>
+            <div class="col-md-7">
+                <h4 class="mb-3">Part description: </h4>
+                <p class="mb-3">{{ part.description }}</p>
+                <p class="mb-3 fw-bold">{{ part.price }} ден.</p>
+                <form method="POST" action="{% url 'add_to_cart' part.id %}">
+                  {% csrf_token %}
+                  <label for="quantity">Quantity:</label>
+                    <span>{{ quantity }}</span>
+                  <button type="submit" disabled class="btn btn-outline-danger">Add to Cart</button>
+                </form>
+                <div class="bg-success text-white text-uppercase d-flex align-items-center justify-content-center mb-3 mt-3" style="height: 50px">
+                    <span>The part was successfully added to your cart!</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-around mb-3 mt-3">
+                    <a class="btn btn-dark text-white" href="{% url 'parts' %}">Browse more parts</a>
+                    <a class="btn btn-danger" href="{% url 'shopping_cart' %}">See your shopping cart</a>
+                </div>
+            </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Admin orders
+{% endblock %}
+
+{% block content %}
+<h1 class="display-6">Admin orders</h1>
+<table class="table pt-3">
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Order Total Amount</th>
+        <th>Order Date</th>
+        <th>Order Status</th>
+        <th>Order Details</th>
+        <th>Change status</th>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+        <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.total_amount }}</td>
+        <td>{{ order.created_at }}</td>
+        <td>{{ order.order_status }}</td>
+        <td><a href="{% url 'order_details' order.id %}" class="btn btn-primary">Details</a></td>
+        <td>
+        {% if order.order_status == "In progress" %}
+            <a href="{% url 'change_order_status' order.id %}" class="btn btn-warning">Change status</a>
+        {% endif %}
+        </td>
+    {% endfor %}
+</table>
+{% endblock %}

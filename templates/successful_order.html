@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Successful order
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center pt-5">
+    <div class="col-md-6">
+
+    <h1 class="display-4 mb-5">The order was successful</h1>
+    <a href="{% url 'parts' %}" class="btn btn-primary w-100 mb-5">Back to parts</a>
+    <a href="{% url 'my_orders' %}" class="btn btn-warning w-100 mb-5">View my orders</a>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Order details
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-between pt-3">
+            <h1 class="display-6 pb-3">Delivery info</h1>
+            <div class="col-md-8">
+                <p><strong>Address: </strong>Street: {{ delivery.street }}, Number: {{ delivery.number }}</p>
+                <p><strong>Municipality: </strong>{{ delivery.municipality }}</p>
+                <p><strong>Full Name: </strong>{{ delivery.full_name }}</p>
+                <p><strong>Phone Number: </strong>{{ delivery.number }}</p>
+                <p><strong>Method of payment: </strong>{{ delivery.payment_method }}</p>
+            </div>
+        </div>
+    <h1 class="display-6">Order info</h1>
+    <p><strong>Order status: </strong>{{ order.order_status }}</p>
+        {% for cartItem in cart_items %}
+            <div class="row justify-content-between pt-3">
+            <div class="col-md-3">
+                <div style="height: 10rem; width: 80%">
+                    <img src="{{ MEDIA_URL }}{{ cartItem.part.image.url }}" alt="{{ cartItem.part.name }}" class="img-fluid">
+                </div>
+            </div>
+                <div class="col-md-8">
+                <div class="text-mt-3">
+                <h5>{{ cartItem.part.name }}</h5>
+                <p>One piece : {{ cartItem.part.price }} ден.</p>
+                <p>Quantity: {{ cartItem.quantity }}</p>
+                <h5>Manufacturer: </h5>
+                <img src="{{ MEDIA_URL }}{{ cartItem.part.manufacturer.image.url }}" alt="{{ cartItem.part.manufacturer.name }}" class="img-fluid mb-3" style="width: 10rem;height: 4rem">
+                <p>Total price for this part: {{ cartItem.subtotal }} ден.</p>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+    <p><strong>Total price for the whole order: </strong>{{ total_price }} ден.</p>
+
+{% endblock %}

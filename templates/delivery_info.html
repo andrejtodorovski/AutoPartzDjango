@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delivery info
+{% endblock %}
+
+{% block content %}
+        <div class="row d-flex justify-content-center">
+        <div class="col-md-4 bg-white">
+            <img src="#" alt="">
+            <h2 class="display-6 pt-3 text-center">Delivery info</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <h4>Total price for the order is {{ total_price }}</h4>
+                <button type="submit" class="btn btn-primary w-100 mb-3 mt-3">Order now</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

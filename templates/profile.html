@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+    <h1>Profile</h1>
+    {% if user.is_superuser %}
+        <p>
+            <strong>Orders in the system: {{ system_orders }}</strong>
+        </p>
+        <p>
+            <strong>Orders in progress: {{ in_progress_orders }}</strong>
+        </p>
+    {% else %}
+    <p>
+        <strong>Email: </strong> {{ currentUser.email }}
+    </p>
+    <p>
+        <strong>Full name: </strong> {{ currentUser.full_name }}
+    </p>
+    <p>
+        <strong>Username: </strong> {{ currentUser.user.username }}
+    </p>
+    <p>
+        <strong>Number of orders: </strong> {{ order_number }}
+    </p>
+    {% endif %}
+{% endblock %}

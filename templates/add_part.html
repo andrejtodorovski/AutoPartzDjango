@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Add part
+{% endblock %}
+
+{% block content %}
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-4 bg-white">
+            <h2 class="display-6 mt-3 text-center">Add part</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary w-100 mb-3">Add the part</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

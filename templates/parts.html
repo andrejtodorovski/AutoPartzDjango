@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Parts
+{% endblock %}
+
+{% block content %}
+    <h1 class="display-6">All parts</h1>
+    <div class="row justify-content-between pt-3">
+        {% for part in parts %}
+            <div class="col-md-3">
+                <div style="height: 20rem; width: 100%">
+                    <img src="{{ MEDIA_URL }}{{ part.image.url }}" alt="{{ part.name }}" class="img-fluid">
+                </div>
+                <div class="text-center mt-3">
+                <h5>{{ part.name }}</h5>
+                <p>{{ part.price }} ден.</p>
+                <h5>Manufacturer: </h5>
+                <img src="{{ MEDIA_URL }}{{ part.manufacturer.image.url }}" alt="{{ part.manufacturer.name }}" class="img-fluid mb-3" style="width: 15rem;height: 5rem">
+                <a href="{% url 'part_details' part.id %}" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
