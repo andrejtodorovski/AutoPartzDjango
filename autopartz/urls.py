@@ -4,7 +4,8 @@ from django.urls import path
 from hw5 import settings
 from .views import login_view, register_view, parts_view, \
     part_details, add_to_cart, shopping_cart, home, logout_view, profile_view, my_orders_view, delivery_info, \
-    successful_order, order_details, remove_from_cart, admin_orders, add_part, change_order_status
+    successful_order, order_details, remove_from_cart, admin_orders, add_part, change_order_status, completed_order, \
+    cancel_order
 
 urlpatterns = [
                   path('', home, name='home'),
@@ -24,4 +25,7 @@ urlpatterns = [
                   path('admin-orders', admin_orders, name='admin_orders'),
                   path('add-part', add_part, name='add_part'),
                   path('change-order-status/<int:pk>/', change_order_status, name='change_order_status'),
+                  path('cancel-order/<int:pk>/', cancel_order, name='cancel_order'),
+                  path('completed-order/<int:pk>/', completed_order, name='completed_order'),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

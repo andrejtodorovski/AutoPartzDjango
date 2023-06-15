@@ -25,8 +25,9 @@
         <td>{{ order.order_status }}</td>
         <td><a href="{% url 'order_details' order.id %}" class="btn btn-primary">Details</a></td>
         <td>
-        {% if order.order_status == "In progress" %}
-            <a href="{% url 'change_order_status' order.id %}" class="btn btn-warning">Change status</a>
+        {% if order.order_status == "Created" %}
+            <a href="{% url 'change_order_status' order.id %}" class="btn btn-warning">Shipped</a>
+        {% else %}
         {% endif %}
         </td>
     {% endfor %}

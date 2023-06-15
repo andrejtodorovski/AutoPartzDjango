@@ -197,6 +197,19 @@ def add_part(request):
 
 def change_order_status(request, pk):
     order = get_object_or_404(Order, pk=pk)
-    order.order_status = 'Delivered'
+    order.order_status = 'Shipped'
     order.save()
     return redirect('admin_orders')
+
+
+def cancel_order(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    order.delete()
+    return redirect('my_orders')
+
+
+def completed_order(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    order.order_status = 'Completed'
+    order.save()
+    return redirect('my_orders')
