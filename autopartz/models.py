@@ -81,7 +81,7 @@ class Order(models.Model):
     total_amount = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     order_status = models.CharField(max_length=100,
-                                    choices=([('In progress', 'In progress'), ('Delivered', 'Delivered')]))
+                                    choices=([('Created', 'Created'), ('Shipped', 'Shipped'), ('Completed', 'Completed')]))
 
     def __str__(self):
         return str(self.id)

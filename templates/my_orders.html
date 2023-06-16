@@ -14,6 +14,7 @@
         <th>Order Date</th>
         <th>Order Status</th>
         <th>Order Details</th>
+        <th>Actions</th>
     </thead>
     <tbody>
     {% for order in orders %}
@@ -23,6 +24,12 @@
         <td>{{ order.created_at }}</td>
         <td>{{ order.order_status }}</td>
         <td><a href="{% url 'order_details' order.id %}" class="btn btn-primary">Details</a></td>
+        {% if order.order_status == 'Created' %}
+        <td><a href="{% url 'cancel_order' order.id %}" class="btn btn-danger">Cancel</a></td>
+        {% endif %}
+        {% if order.order_status == 'Shipped' %}
+        <td><a href="{% url 'completed_order' order.id %}" class="btn btn-success">Mark as Completed</a></td>
+        {% endif %}
     {% endfor %}
 </table>
 {% endblock %}
