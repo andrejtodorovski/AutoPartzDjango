@@ -87,7 +87,7 @@ def profile_view(request):
         'currentUser': get_current_custom_user(request),
         'order_number': get_current_custom_user_orders(request).count(),
         'system_orders': Order.objects.all().count(),
-        'in_progress_orders': Order.objects.all().filter(order_status='In progress').count(),
+        'in_progress_orders': Order.objects.all().filter(order_status='Created').count(),
     })
 
 
@@ -103,7 +103,7 @@ def delivery_info(request):
     if request.method == 'POST':
         form = DeliveryForm(request.POST)
         order = Order(user=get_current_custom_user(request), cart=get_current_custom_user_shopping_cart(request),
-                      total_amount=total_price, order_status='In progress')
+                      total_amount=total_price, order_status='Created')
         order.save()
         if form.is_valid():
             delivery = form.save(commit=False)
@@ -204,6 +204,10 @@ def change_order_status(request, pk):
 
 def cancel_order(request, pk):
     order = get_object_or_404(Order, pk=pk)
+    for cart_item in get_parts_in_order(order):
+        part = cart_item.part
+        part.available += cart_item.quantity
+        part.save()
     order.delete()
     return redirect('my_orders')
 
