@@ -54,12 +54,12 @@ def add_to_cart(request, pk):
     part = get_object_or_404(Part, pk=pk)
     quantity = request.POST.get('quantity')
     if part.available < int(quantity):
-        return render(request, 'parts.html', {'part': part, 'quantity': quantity})
+        return render(request, 'part_details.html', {'part': part, 'quantity': quantity, 'error': True})
     else:
         cart_item = CartItem(part=part, quantity=quantity, cart=ShoppingCart.objects.all().filter(
             user=get_current_custom_user(request)).first())
         cart_item.save()
-        return render(request, 'added_to_cart.html', {'part': part, 'quantity': quantity})
+        return render(request, 'part_details.html', {'part': part, 'quantity': quantity, 'success': True})
 
 
 def shopping_cart(request):
