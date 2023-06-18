@@ -26,10 +26,30 @@
                         {% if not isAlreadyInCart %}
                         <form method="POST" action="{% url 'add_to_cart' part.id %}">
                           {% csrf_token %}
-                          <label for="quantity">Quantity:</label>
-                          <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control w-25 d-inline">
+                            {% if error %}
+                                <label for="quantity">Quantity:</label>
+                                <input type="number" id="quantity" name="quantity" value={{ quantity }} min="1" class="form-control w-25 d-inline">
+                                <button type="submit" class="btn btn-outline-danger">Add to Cart</button>
+                                <div class="bg-danger text-white text-uppercase d-flex align-items-center justify-content-center mb-3 mt-3" style="height: 50px">
+                                    <span>You have entered an invalid number. Please try again</span>
+                                </div>
+                            {% elif success %}
+                                <label for="quantity">Quantity:</label>
+                                <span>{{ quantity }}</span>
+                                <button type="submit" disabled class="btn btn-outline-danger">Add to Cart</button>
+                                <div class="bg-success text-white text-uppercase d-flex align-items-center justify-content-center mb-3 mt-3" style="height: 50px">
+                                    <span>The part was successfully added to your cart!</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-around mb-3 mt-3">
+                                    <a class="btn btn-dark text-white" href="{% url 'parts' %}">Browse more parts</a>
+                                    <a class="btn btn-danger" href="{% url 'shopping_cart' %}">See your shopping cart</a>
+                                </div>
+                            {% else %}
+                                  <label for="quantity">Quantity:</label>
+                                  <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control w-25 d-inline">
+                                  <button type="submit" class="btn btn-outline-danger">Add to Cart</button>
+                            {% endif %}
 
-                          <button type="submit" class="btn btn-outline-danger">Add to Cart</button>
                         </form>
                         {% else %}
                             <p class="text-danger">Part already in cart</p>
